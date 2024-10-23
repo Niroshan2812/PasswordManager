@@ -1,11 +1,12 @@
 import React from "react";
 import {View, Text} from "react-native";
 
-const UpdatePassword =()=>{
+const SettingsUser =()=>{
     return(
         <View>
-            <Text>Update Password</Text>
+            <Text>SettingsUser</Text>
         </View>
     )
 }
-export default UpdatePassword;
+
+export default SettingsUser;
