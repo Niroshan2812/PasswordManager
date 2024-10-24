@@ -12,8 +12,10 @@ import CustomButton from "../components/CustomButton";
 import TextInputStyle from "../components/TextInputStyle";
 import CustomLable from "../components/CustomLable";
 
+
 const AddPassword = () => {
   const [nameOfit, setNameofit] = useState("");
+  const [catogary, setCatogary] = useState("");
   const [enadUser, seteandUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,7 +52,7 @@ const AddPassword = () => {
         <CustomButton
         title="Add Password"
         onPress={() => {
-          alert("Button pRESS");
+         alert("Predd")
         }}
       />
 
