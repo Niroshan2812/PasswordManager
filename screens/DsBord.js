@@ -20,7 +20,7 @@ const DsBord = () => {
 
 
       <View style={style.secHeader}>
-        <CustomIcon name="plus" size={24} color="#000" onPress={()=>{navigation.navigate('UpdatePassword')}}/>
+        <CustomIcon name="plus" size={24} color="#000" onPress={()=>{navigation.navigate('AddPassword')}}/>
 
       </View>
     </SafeAreaView>
