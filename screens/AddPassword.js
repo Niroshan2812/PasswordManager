@@ -11,8 +11,7 @@ import { TextInput } from "react-native-gesture-handler";
 import CustomButton from "../components/CustomButton";
 import TextInputStyle from "../components/TextInputStyle";
 import CustomLable from "../components/CustomLable";
-import * as CryptoJs from "expo-crypto";
-import { createTables, initilizedb, insertPassword } from "../config/db";
+import { initializeDatabace, dropTable, insertValueIntoDb } from "../config/db";
 
 const AddPassword = () => {
   const [nameOfit, setNameofit] = useState("");
@@ -20,34 +19,22 @@ const AddPassword = () => {
   const [enadUser, seteandUser] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect (()=>{
+    const setUpDatabace = async ()=>{
+      await initializeDatabace();
+
+    };
+    setUpDatabace();
+  },[])
+
   //For create table
-  useEffect(() => {
-    initilizedb();
-  }, []);
-
-
-  //Function for saving data
-  const handleAppPassword = async() => {
-
-    console.log(nameOfit,catogary,enadUser,password)
-    
+  const handleAppPassword = () => {
     if (!nameOfit || !catogary || !enadUser || !password) {
-      Alert.alert("Error", "All field need to be filed ");
+      Alert.alert("Error", "Please fill all the fields");
       return;
     }
-    const encriptPssword = await CryptoJs.digestStringAsync(
-      CryptoJs.CryptoDigestAlgorithm.SHA256,
-      password
-    );
-
-    insertPassword(nameOfit, catogary, enadUser, encriptPssword);
-    Alert.alert("Success", "Password saved");
-
-    //clear After Saved
-    setNameofit("");
-    setCatogary("");
-    seteandUser("");
-    setPassword("");
+    // Make this encription process passed --> this becouse the error
+    insertValueIntoDb(nameOfit,catogary,enadUser,password);
   };
 
   return (
@@ -57,14 +44,10 @@ const AddPassword = () => {
         <TextInputStyle
           placeholder="  Website/AppName"
           onChangeText={setNameofit}
-          
         />
 
         <CustomLable title={"Catogary"} />
-        <TextInputStyle
-          placeholder="  Catogary"
-          onChangeText={setCatogary}
-        />
+        <TextInputStyle placeholder="  Catogary" onChangeText={setCatogary} />
 
         <CustomLable title={"Email / UserName"} />
         <TextInputStyle
@@ -73,15 +56,9 @@ const AddPassword = () => {
         />
 
         <CustomLable title={"Password"} />
-        <TextInputStyle
-          placeholder="  Password"
-          onChangeText={setPassword}
-        />
+        <TextInputStyle placeholder="  Password" onChangeText={setPassword} />
 
-        <CustomButton
-          title="Add Password"
-          onPress={handleAppPassword}
-        />
+        <CustomButton title="Add Password" onPress={handleAppPassword} />
       </View>
     </SafeAreaView>
   );

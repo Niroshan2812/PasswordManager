@@ -1,90 +1,54 @@
 import * as SQLite from 'expo-sqlite';
-import { useState } from 'react';
 
-let db;
+export const openDataBace = async () =>{
+  const db = SQLite.openDatabaseAsync("UserDetails.db");
+  return db;
+}
+ export const initializeDatabace = async () =>{
+  const db = await openDataBace();
 
-export const initilizedb = async () => {
   try {
-   const db = await SQLite.openDatabaseAsync("PasswordManager");
-    createTables();
-    console.log('Databae initialized Succesfully ')
+    await db.execAsync(
+    
+   
+      `CREATE TABLE IF NOT EXISTS userDetails (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nameOfit TEXT,
+        catogary TEXT,
+        enadUser TEXT,
+        password TEXT
+      );`
+    );
+    console.log("Table created");
   } catch (error) {
-    console.log("error initializing databace", error);
+    console.log("Unable to create a Tables");
   }
+
+
 };
 
 
-export const createTables = () => {
 
-  if (!db){
-    console.log('Databace is Not inilialized');
-    return;
-  }
-
-
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS passwords (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nameOfit TEXT,
-            category TEXT,
-            enadUser TEXT,
-            password TEXT
-          )`,
-      [],
-      () => {
-        console.log("Table created successfully");
-      },
-      (tx, error) => {
-        console.log("Error creating table: ", error);
-      }
+export const insertValueIntoDb =async (nameOfit,catogary,enadUser,password)=>{
+  const db = await openDataBace();
+  try {
+    await db.execAsync('INSERT INTO userDetails (nameOfit,catogary,enadUser,password) VALUES (?,?,?,?) ',
+      [nameOfit,catogary,enadUser,password]
     );
-  });
-};
-export const insertPassword = (nameOfit, category, enadUser, password) => {
-
-  if (!db){
-    console.log('Databace is Not inilialized');
-    return;
-
+    console.log("Data Inserted");
+  } catch (error) {
+    console.log("Error when insering data", error);
   }
+  
+}
 
-  db.transaction(tx => {
-    tx.executeSql(
-      `INSERT INTO passwords (nameOfit, category, enadUser, password) VALUES (?, ?, ?, ?)`,
-      [nameOfit, category, enadUser, password],
-      (tx, result) => {
-        console.log("Data inserted successfully");
-      },
-      (tx, error) => {
-        console.log("Error inserting data: ", error);
-      }
-    );
-  });
-};
-
-//retrive all details
-export const getPasswords = (callback) => {
-  if(!db){
-    console.log('Databace is Not inilialized');
-    return;
+export const dropTable = async () =>{
+  const db = await openDataBace();
+  try {
+    await db.execAsync('DROP TABLE userDetails');
+  console.log("Table drop successfully ")
+  } catch (error) {
+    console.log("Error Dropping table", error);
   }
-
-  db.transaction(tx => {
-    tx.executeSql(
-      `SELECT * FROM passwords`,
-      [],
-      (tx, results) => {
-        const rows = results.rows;
-        let passwords = [];
-        for (let i = 0; i < rows.length; i++) {
-          passwords.push(rows.item(i));
-        }
-        callback(passwords);
-      },
-      (tx, error) => {
-        console.log("Error retrieving data: ", error);
-      }
-    );
-  });
+  
 };
