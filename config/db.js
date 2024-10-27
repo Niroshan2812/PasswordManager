@@ -71,6 +71,25 @@ export const getCatogaryFromDB = async ()=>{
     return[];
   }
 }
+//to get catogary and name of the site 
+export const getDashbordDetailsFromDB = async ()=>{
+  const db = await openDataBace();
+  try {
+      const resultForDahsbord  =  await db.getAllAsync("SELECT * FROM userDetails ", []);
+      const dashbrdData = resultForDahsbord.map(row=>({
+        id:row.id,
+        nameOfit: row.nameOfit,
+        catogary:row.catogary
+      }));
+     
+      return dashbrdData;
+      
+  } catch (error) {
+    console.log("Error when getting Dahbord details from db ", error );
+    return[];
+  }
+}
+
 
 export const dropTable = async () =>{
   const db = await openDataBace();

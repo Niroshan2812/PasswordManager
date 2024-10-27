@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import CustomIcon from "../components/CustomIcon";
 import Card from "../components/Card";
+import {getDashbordDetailsFromDB} from "../config/db";
 
 const DsBord = () => {
   const navigation = useNavigation();
-
+  const [dashbrdData, setDashbrdData] = useState([]);
   
+  useEffect (()=>{
+    const fetchData= async ()=>{
+      const data = await getDashbordDetailsFromDB();
+      setDashbrdData(data);
+    };
+    fetchData();
+  },[]);
 
   return (
     <SafeAreaView style={style.container}>
@@ -18,11 +26,18 @@ const DsBord = () => {
       <View style={style.header}>
         <Text>Implement card</Text>
         <Button onPress={()=>{navigation.navigate('DetailView')}}title="For navigate Detail View "/>
-          {/* Render the Card component */}
-        <Card
-          title="Card Title"
-          description="This is a description of the card."
+
+          {/* Render the Card component using FlatList */}
+          <FlatList data={dashbrdData}
+          keyExtractor={(item) =>item.id}
+          renderItem={({item})=>(
+            <Card
+          title={item.nameOfit}
+          description={item.catogary}
+          
           onPress={() => navigation.navigate('DetailView')}
+        />
+  )}
         />
       </View>
 

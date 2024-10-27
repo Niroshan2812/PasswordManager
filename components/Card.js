@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 const Card = ({ title, description, onPress }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.card}>
-        
+
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </TouchableOpacity>
@@ -14,6 +14,8 @@ const Card = ({ title, description, onPress }) => {
 
 const styles = StyleSheet.create({
   card: {
+    
+    flexDirection:'row',
     backgroundColor: '#fff',
     padding: 16,
     marginVertical: 8,
