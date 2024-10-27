@@ -40,7 +40,7 @@ export const insertValueIntoDb =async (nameOfit,catogary,enadUser,password)=>{
   }
   
 }
-
+// to get all value
 export const getValuefromDB = async () =>{
   const db = await openDataBace();
   try {
@@ -60,6 +60,17 @@ export const getValuefromDB = async () =>{
   }
 }
 
+//to get catogaries value 
+export const getCatogaryFromDB = async ()=>{
+  const db = await openDataBace();
+  try {
+      const resultfromDB = await db.getAllAsync("SELECT DISTINCT catogary FROM  userDetails", []);
+      return resultfromDB.map(row => row.catogary);
+  } catch (error) {
+    console.log("Error when getting catogary from DB", error );
+    return[];
+  }
+}
 
 export const dropTable = async () =>{
   const db = await openDataBace();
