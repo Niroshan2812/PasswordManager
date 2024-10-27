@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 function AppStack (){
     return(
         <Stack.Navigator>
-            <Stack.Screen name = "Dashboard" component={Dsbord} />
+            <Stack.Screen name = "Dashboard" component={Dsbord} options={{headerShown:false}} />
             <Stack.Screen name ="AddPassword" component={AddPassword}/>
             <Stack.Screen name  = "SettingUser" component ={SettingsUser}/>
             <Stack.Screen name = "UpdatePassword" component ={UpdatePassword}/>

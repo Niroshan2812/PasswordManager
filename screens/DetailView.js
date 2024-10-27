@@ -20,7 +20,7 @@ const DetailView = () => {
     };
     fetchData();
   }, []);
-  // render each item for help to flatList
+  // render each item for help to flatList s
   const renderItem = ({ item }) => {
     return (
       <View style={style.itemContaiiner}>
@@ -35,19 +35,17 @@ const DetailView = () => {
   };
   return (
     <SafeAreaView>
-      <View style = {style.flatListView}>
-      <FlatList
-        data={userDetails}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-      />
+      <View style={style.flatListView}>
+        <FlatList
+          data={userDetails}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+        />
       </View>
-      <View style = {style.footerButtonContainner}>
-        <CustomButton title={"Delete"}/>
-        <CustomButton title={"Upgrade"}/>
+      <View style={style.footerButtonContainner}>
+        <CustomButton title={"Delete"} />
+        <CustomButton title={"Upgrade"} />
       </View>
-      
-
     </SafeAreaView>
   );
 };
@@ -64,15 +62,13 @@ const style = StyleSheet.create({
   },
   itemText: {
     fontSize: 16,
-  },flatListView:{
-    
   },
-  footerButtonContainner:{
-    
-    flexDirection:'row',
-    paddingHorizontal:10,
-    justifyContent:'space-between',
-    alignContent:'center'
-  }
+  flatListView: {},
+  footerButtonContainner: {
+    flexDirection: "row",
+    paddingHorizontal: 10,
+    justifyContent: "space-between",
+    alignContent: "center",
+  },
 });
 export default DetailView;

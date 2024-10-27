@@ -16,21 +16,17 @@ import {
   getCatogaryFromDB,
   insertValueIntoDb,
 } from "../config/db";
-import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
-
-
 
 const AddPassword = () => {
   const [nameOfit, setNameofit] = useState("");
   const [catogary, setCatogary] = useState("");
   const [enadUser, seteandUser] = useState("");
   const [password, setPassword] = useState("");
-  //For adding catogary
+  //For adding catogary in
   const [categories, setcategories] = useState([]);
   const [isAddingNewCatogary, setisAddingNewCatogary] = useState(false);
-  
-
 
   useEffect(() => {
     const setUpDatabace = async () => {
@@ -53,8 +49,6 @@ const AddPassword = () => {
     }
     // Make this encription process passed --> this becouse the error
     await insertValueIntoDb(nameOfit, catogary, enadUser, password);
-   
-    
   };
 
   return (
@@ -80,11 +74,9 @@ const AddPassword = () => {
                 setisAddingNewCatogary(true);
               } else {
                 setCatogary(value);
-                
               }
             }}
             items={[
-             
               ...categories.map((category) => ({
                 label: category,
                 value: category,
