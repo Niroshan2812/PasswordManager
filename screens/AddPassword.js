@@ -28,13 +28,13 @@ const AddPassword = () => {
   },[])
 
   //For create table
-  const handleAppPassword = () => {
+  const handleAppPassword = async() => {
     if (!nameOfit || !catogary || !enadUser || !password) {
       Alert.alert("Error", "Please fill all the fields");
       return;
     }
     // Make this encription process passed --> this becouse the error
-    insertValueIntoDb(nameOfit,catogary,enadUser,password);
+    await insertValueIntoDb(nameOfit,catogary,enadUser,password);
   };
 
   return (

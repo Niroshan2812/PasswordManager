@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import CustomIcon from "../components/CustomIcon";
@@ -7,15 +7,14 @@ import CustomIcon from "../components/CustomIcon";
 
 const DsBord = () => {
   const navigation = useNavigation();
+
+  
+
   return (
     <SafeAreaView style={style.container}>
       <View style={style.header}>
-        <Text> Main View </Text>
-        <Button
-          title="Nav"
-          onPress={() => navigation.navigate("AddPassword")}
-        />
-        <Text>Seconf </Text>
+        <Text>Implement card</Text>
+        <Button onPress={()=>{navigation.navigate('DetailView')}}title="For navigate Detail View "/>
       </View>
 
 

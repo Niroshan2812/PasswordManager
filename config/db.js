@@ -9,8 +9,6 @@ export const openDataBace = async () =>{
 
   try {
     await db.execAsync(
-    
-   
       `CREATE TABLE IF NOT EXISTS userDetails (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nameOfit TEXT,
@@ -31,8 +29,9 @@ export const openDataBace = async () =>{
 
 export const insertValueIntoDb =async (nameOfit,catogary,enadUser,password)=>{
   const db = await openDataBace();
+ 
   try {
-    await db.execAsync('INSERT INTO userDetails (nameOfit,catogary,enadUser,password) VALUES (?,?,?,?) ',
+    await db.runAsync('INSERT INTO userDetails (nameOfit,catogary,enadUser,password) VALUES (?,?,?,?) ',
       [nameOfit,catogary,enadUser,password]
     );
     console.log("Data Inserted");
@@ -41,6 +40,26 @@ export const insertValueIntoDb =async (nameOfit,catogary,enadUser,password)=>{
   }
   
 }
+
+export const getValuefromDB = async () =>{
+  const db = await openDataBace();
+  try {
+    const result = await db.getAllAsync("SELECT * FROM userDetails", []);
+    const data = result.map(row => ({
+      id: row.id,
+      nameOfit: row.nameOfit,
+      catogary: row.catogary,
+      enadUser: row.enadUser,
+      password: row.password
+    }))
+    
+    return data;
+  } catch (error) {
+    console.log("Error when getting value in DB", error);
+    return [];
+  }
+}
+
 
 export const dropTable = async () =>{
   const db = await openDataBace();
