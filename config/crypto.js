@@ -14,6 +14,7 @@ export const decryptData = (ciphertext) => {
   const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   return decryptedData;
 };
+/*
 // Encrypt data
 const sensitiveData = { username: "user123", password: "pass123" };
 const encrypted = encryptData(sensitiveData);
@@ -22,3 +23,4 @@ console.log("Encrypted:", encrypted);
 // Decrypt data
 const decrypted = decryptData(encrypted);
 console.log("Decrypted:", decrypted);
+/*
