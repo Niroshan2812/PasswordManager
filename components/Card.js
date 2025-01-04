@@ -1,41 +1,38 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import CustomButton from './CustomButton';
 
-const Card = ({ title, description, onPress }) => {
+const Card = ({ email, username, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.card}>
-
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-    </TouchableOpacity>
+    <View style={styles.card}>
+    <Text style={styles.email}>Email: {email}</Text>
+    <Text style={styles.username}>Username: {username}</Text>
+    <CustomButton title="Press Me" onPress={onPress} />
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    
-    flexDirection:'row',
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 16,
+    borderRadius: 8,
     marginVertical: 8,
     marginHorizontal: 16,
-    borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 4,
+    elevation: 2,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+  email: {
+    fontSize: 16,
+    marginBottom: 4,
   },
-  description: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 4,
+  username: {
+    fontSize: 16,
+    marginBottom: 12,
   },
 });
 
