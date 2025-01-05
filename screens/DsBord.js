@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import CustomIcon from "../components/CustomIcon";
 import Card from "../components/Card";
 import Icon from "react-native-vector-icons/Ionicons";
+import avetar from "../assets/avt.png";
 
 const DsBord = () => {
   const navigation = useNavigation();
@@ -39,9 +40,7 @@ const DsBord = () => {
           <View style={style.avetarContainner}>
             <Image
               style={style.avetar}
-              source={{
-                uri: "https://www.bootdey.com/img/Content/avatar/avatar3.png",
-              }}
+              source={avetar}
             />
           </View>
           <Text style={style.greeting}> Hello, Niroshan</Text>
@@ -94,16 +93,17 @@ const DsBord = () => {
           { name: 'Dribbble Pro', email: 'rahulornob@gmail.com', icon: 'basketball-outline' },
   
         ].map((item, index) => (
-          <View key={index} style={style.recentItem}>
+          <View key={index} style={style.recentItem} >
             <View style={style.recentDetails}>
-              <Icon name={item.icon} size={30} color="gray" />
+              <Icon name={item.icon} size={30} color="gray" onPress={()=>{navigation.navigate("DetailView")}}/>
               <View style={style.recentText}>
-                <Text style={style.recentTitle}>{item.name}</Text>
+                <Text style={style.recentTitle} >{item.name}</Text>
                 <Text style={style.recentEmail}>{item.email}</Text>
               </View>
             </View>
-            <TouchableOpacity>
-              <Icon name="copy-outline" size={20} color="gray" />
+            <TouchableOpacity >
+              <Icon name="copy-outline" size={20} color="gray"  onPress={()=>{navigation.navigate("SettingUser")}}/>
+              
             </TouchableOpacity>
           </View>
         ))}
@@ -130,7 +130,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: 'hsl(234, 57.10%, 67.10%)',
+    backgroundColor: 'hsl(0, 0.00%, 100.00%)',
   },
   topHeader: {
     flexDirection: "row",

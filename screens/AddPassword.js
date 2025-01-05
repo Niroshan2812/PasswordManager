@@ -6,6 +6,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import CustomButton from "../components/CustomButton";
@@ -53,6 +54,31 @@ const AddPassword = () => {
 
   return (
     <SafeAreaView style={style.container}>
+      {/* Search bar*/}
+      <TextInput
+        style={style.searchBar}
+        placeholder="Search a website or app"
+      />
+
+      {/* Quick Links */}
+      <View style={style.quickLink}>
+        <TouchableOpacity style={style.quickLinkButton}>
+          <Text style={style.quickLinkText}>+ Add</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.quickLinkButtonSelected}>
+          <Text style={style.quickLinkTextSelected}>Twitter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.quickLinkButton}>
+          <Text style={style.quickLinkText}>Instagram</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.quickLinkButton}>
+          <Text style={style.quickLinkText}>Facebook</Text>
+        </TouchableOpacity>
+      </View>
+
+        {/* Website */}
+        <Text style={style.website}>www.twitter.com</Text>
+
       <View style={style.lableBtnContainner}>
         <CustomLable title={"Name"} />
         <TextInputStyle
@@ -95,7 +121,7 @@ const AddPassword = () => {
         <CustomLable title={"Password"} />
         <TextInputStyle placeholder="  Password" onChangeText={setPassword} />
 
-        <CustomButton title="Add Password" onPress={handleAppPassword} />
+        <CustomButton title="Add Password" style = {style.buttonhandler} onPress={handleAppPassword} />
       </View>
     </SafeAreaView>
   );
@@ -110,5 +136,49 @@ const style = StyleSheet.create({
     margin: 30,
     shadowOpacity: 10,
   },
+  searchBar: {
+    backgroundColor: "#fff",
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    marginLeft: "8%",
+    marginTop: "5%",
+    marginRight: "8%",
+    borderColor: "#ddd",
+    borderWidth: 1,
+  },
+  quickLink: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 16,
+  },
+  quickLinkButton: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#eee",
+  },
+  quickLinkText: {
+    color: "#555",
+  },
+  quickLinkButtonSelected: {
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#007AFF",
+  },
+  quickLinkTextSelected: {
+    color: "#fff",
+  },
+  website: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+    textAlign: "center",
+    marginBottom: 16,
+  },
+  buttonhandler:{
+    flexDirection:"row", 
+    justifyContent:"space-between", 
+    alignItems:"center"
+  }
 });
 export default AddPassword;
